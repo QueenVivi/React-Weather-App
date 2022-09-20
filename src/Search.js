@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default function Search() {
   let [city, setCity] = useState(null);
+  let [weatherData, setWeatherData] = useState(null);
 
   function handleSubmit(event) {
     let apiKey = "3e325415f46bc35d8d6a6bc88d7c8554";
@@ -11,7 +12,7 @@ export default function Search() {
     event.preventDefault();
 
     function displayWeather(response) {
-      console.log(apiUrl);
+      setWeatherData(response.data);
     }
   }
 
@@ -29,6 +30,31 @@ export default function Search() {
         ></input>
         <input type="submit" value="Search"></input>
       </form>
+      {weatherData && (
+        <ul className="WeatherDescription">
+          <li>{city}</li>
+          <li>Temperature: {Math.round(weatherData.main.temp)}°C</li>
+          <li>Description: {weatherData.weather[0].description}</li>
+          <li>Humidity:{weatherData.main.humidity}</li>
+          <li>Wind:{weatherData.wind.speed}km/h</li>
+          <li>
+            <img
+              alt={`weather icon: ${weatherData.weather[0].description}`}
+              src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+            />
+          </li>
+        </ul>
+      )}
+      <p>
+        <a
+          href="https://github.com/QueenVivi/React-Weather-App"
+          alt="link to github"
+          target="_blank"
+        >
+          Open-source
+        </a>{" "}
+        code by Vivian Xu
+      </p>
     </div>
   );
 }
