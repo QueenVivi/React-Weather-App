@@ -48,8 +48,9 @@ export default function Search() {
       <p>
         <a
           href="https://github.com/QueenVivi/React-Weather-App"
-          alt="link to github"
+          title="link to github"
           target="_blank"
+          rel="noreferrer"
         >
           Open-source
         </a>{" "}
